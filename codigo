@@ -18,8 +18,6 @@ install.packages("writexl") # Pacote para ler planilhas do Excel
 library(writexl)
 install.packages("apply") # Pacote de quadro de dados ou matriz
 library(apply)
-install.packages("colorDF") # Pacote para colorir dataframe
-library(colorDF)
 
 #Lendo os pdfs e criando uma lista
 
