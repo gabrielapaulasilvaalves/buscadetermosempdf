@@ -1,0 +1,43 @@
+# Instalação de pacotes
+
+install.packages("pdftools") # Pacote de Leitura de PDF
+library(pdftools)
+install.packages("stringr") # Pacote para manipulação de stringr
+library(stringr)
+install.packages("tm") # Pacote para textmining
+library(tm)
+install.packages("SnowballC") # Pacote para recolher palavras em uma raiz comum
+library(SnowballC)
+install.packages("dplyr") # Pacote para realizar transformação de dados
+library(dplyr)
+install.packages("glue") # Pacote de string interpretados que são pequenos
+library(glue)
+install.packages("magrittr") # Pacote que integra a gramática de gráficos
+library(magrittr)
+install.packages("writexl") # Pacote para ler planilhas do Excel
+library(writexl)
+install.packages("apply") # Pacote de quadro de dados ou matriz
+library(apply)
+install.packages("colorDF") # Pacote para colorir dataframe
+library(colorDF)
+
+#Lendo os pdfs e criando uma lista
+
+files <- list.files(pattern = "pdf$") # Puxa todos pdfs do diretório
+# pdftools::pdf_text("ExemploDePDF.pdf") é a função de ler um pdf específico
+texto <- lapply(files, pdf_text) # já aqui, puxa e lê todos
+
+
+#Buscando termos e trechos
+
+frases <- texto |> stringr::str_split("\\.") |> unlist()
+frases_detect <- frases[stringr::str_detect(frases, "termo1|termo2")]
+numero_de_vezes <- length(frases_detect)
+
+#Exportando o resultado
+resultado_exemplo <- data.frame(Arquivo = files,
+                                 Trechos = frases_detect
+)
+
+teste_xlsx <- "C:\\Users\\NOME\\Documents\\PASTA\\teste.xlsx"
+writexl::write_xlsx(x= resultado_exemplo, path = teste_xlsx)
